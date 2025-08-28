@@ -14,7 +14,7 @@ pipeline {
 
             steps {
 
-                git branch: 'main', url: 'https://github.com/your-org/your-api-repo.git'
+                git branch: 'main', url: 'https://github.com/Hemanthgowda0/APIC.git'
 
             }
 
