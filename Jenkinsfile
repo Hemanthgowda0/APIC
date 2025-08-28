@@ -7,7 +7,15 @@ pipeline {
         ORG = 'api-connect-g8' // Instance name
         CATALOG = 'DEV' // Catalog name
     }
- 
+    environment {
+        PATH = "C:\\Program Files\apic;%PATH%"
+    }
+    stages {
+        stage('Accept License') {
+            steps {
+                bat 'echo Y | apic licenses --accept'
+            }
+        }
     stages {
 
         stage('Check PATH') {
