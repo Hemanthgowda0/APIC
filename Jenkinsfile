@@ -10,6 +10,13 @@ pipeline {
  
     stages {
 
+        stage('Check PATH') {
+            steps {
+                bat 'echo %PATH%'
+                bat 'apic version'
+            }
+        }
+
         stage('Checkout API Code') {
 
             steps {
