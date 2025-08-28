@@ -6,9 +6,7 @@ pipeline {
         APIC_PASS = 'Ssm@9916166929'
         ORG = 'api-connect-g8' // Instance name
         CATALOG = 'DEV' // Catalog name
-    }
-    environment {
-        PATH = "C:\\Program Files\apic;%PATH%"
+        PATH = "C:\\\\Program Files\\\\apic;%PATH%" // Escaped backslashes
     }
     stages {
         stage('Accept License') {
@@ -16,7 +14,6 @@ pipeline {
                 bat 'echo Y | apic licenses --accept'
             }
         }
-    stages {
 
         stage('Check PATH') {
             steps {
@@ -26,57 +23,38 @@ pipeline {
         }
 
         stage('Checkout API Code') {
-
             steps {
-
                 git branch: 'main', url: 'https://github.com/Hemanthgowda0/APIC.git'
-
             }
-
         }
- 
+
         stage('Validate API Spec') {
-
             steps {
-
                 bat 'apic validate .\\api\\ibm-sample-order-api.yaml'
-
             }
-
         }
- 
+
         stage('Login to APIC') {
-
             steps {
-
                 bat """
-        apic login ^
-          --server %APIC_SERVER% ^
-          --username "%APIC_USER%" ^
-          --password "%APIC_PASS%" ^
-          --realm provider/default-idp-1
-        """
+                    apic login ^
+                      --server %APIC_SERVER% ^
+                      --username "%APIC_USER%" ^
+                      --password "%APIC_PASS%" ^
+                      --realm provider/default-idp-1
+                """
             }
-
         }
- 
+
         stage('Publish API to DEV Catalog') {
-
             steps {
-
                 bat """
-        apic publish .\\api\\ibm-sample-order-api.yaml ^
-          --server %APIC_SERVER% ^
-          --org %ORG% ^
-          --catalog %CATALOG%
-        """
-
+                    apic publish .\\api\\ibm-sample-order-api.yaml ^
+                      --server %APIC_SERVER% ^
+                      --org %ORG% ^
+                      --catalog %CATALOG%
+                """
             }
-
         }
-
     }
-
 }
-
- 
