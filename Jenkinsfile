@@ -24,7 +24,7 @@ pipeline {
 
             steps {
 
-                sh 'apic validate ./api/ibm-sample-order-api.yaml'
+                bat 'apic validate .\\api\\ibm-sample-order-api.yaml'
 
             }
 
@@ -34,20 +34,13 @@ pipeline {
 
             steps {
 
-                sh '''
-
-                apic login \
-
-                  --server $APIC_SERVER \
-
-                  --username "$APIC_USER" \
-
-                  --password "$APIC_PASS" \
-
-                  --realm provider/default-idp-1
-
-                '''
-
+                bat """
+        apic login ^
+          --server %APIC_SERVER% ^
+          --username "%APIC_USER%" ^
+          --password "%APIC_PASS%" ^
+          --realm provider/default-idp-1
+        """
             }
 
         }
@@ -56,17 +49,12 @@ pipeline {
 
             steps {
 
-                sh '''
-
-                apic publish ./api/ibm-sample-order-api.yaml \
-
-                  --server $APIC_SERVER \
-
-                  --org $ORG \
-
-                  --catalog $CATALOG
-
-                '''
+                bat """
+        apic publish .\\api\\ibm-sample-order-api.yaml ^
+          --server %APIC_SERVER% ^
+          --org %ORG% ^
+          --catalog %CATALOG%
+        """
 
             }
 
