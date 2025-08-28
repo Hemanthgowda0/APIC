@@ -1,0 +1,30 @@
+info:
+  version: 1.0.0
+  title: Order Product
+  name: order-product
+gateways:
+  - datapower-api-gateway
+plans:
+  default-plan:
+    title: Default Plan
+    description: Default Plan
+    rate-limits:
+      default:
+        value: 100/1hour
+    apis:
+      ibm-sample-order-api2.0.0: {}
+apis:
+  ibm-sample-order-api2.0.0:
+    $ref: ibm-sample-order-api_2.0.0.yaml
+visibility:
+  view:
+    type: public
+    orgs: []
+    tags: []
+    enabled: true
+  subscribe:
+    type: authenticated
+    orgs: []
+    tags: []
+    enabled: true
+product: 1.0.0
